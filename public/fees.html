@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Fees Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, select, button {
+            margin: 5px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #4facfe;
+            color: white;
+        }
+        .dark-mode {
+            background: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>School Fees Management</h2>
+        <input type="text" id="search" placeholder="Search Student" onkeyup="filterStudents()">
+        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        <button onclick="exportToCSV()">Export CSV</button>
+        
+        <h3>Add Student</h3>
+        <input type="text" id="studentName" placeholder="Name">
+        <select id="studentClass">
+            <option>Section A</option>
+            <option>Section B</option>
+            <option>Section C</option>
+            <option>Section D</option>
+            <option>Section E</option>
+        </select>
+        <input type="number" id="feesDeposit" placeholder="Fees Paid">
+        <button onclick="addStudent()">Add</button>
+
+        <h3>Student Data</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Total Fees</th>
+                    <th>Paid</th>
+                    <th>Pending</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="studentTable"></tbody>
+        </table>
+        <h3>Total Pending Fees: <span id="totalPending">0</span></h3>
+    </div>
+
+    <script>
+        let students = [];
+        const classFees = { "Class 1": 500, "Class 2": 600, "Class 3": 700 };
+
+        function addStudent() {
+            const name = document.getElementById("studentName").value;
+            const className = document.getElementById("studentClass").value;
+            const paid = parseFloat(document.getElementById("feesDeposit").value);
+            const total = classFees[className];
+            const pending = total - paid;
+
+            students.push({ name, className, total, paid, pending });
+            renderTable();
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById("studentTable");
+            tbody.innerHTML = "";
+            let totalPending = 0;
+            students.forEach((student, index) => {
+                totalPending += student.pending;
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${student.name}</td>
+                        <td>${student.className}</td>
+                        <td>${student.total}</td>
+                        <td>${student.paid}</td>
+                        <td>${student.pending}</td>
+                        <td>
+                            <button onclick="editStudent(${index})">Edit</button>
+                            <button onclick="deleteStudent(${index})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            document.getElementById("totalPending").innerText = totalPending;
+        }
+
+        function editStudent(index) {
+            const newPaid = prompt("Enter updated fee amount:", students[index].paid);
+            if (newPaid !== null) {
+                students[index].paid = parseFloat(newPaid);
+                students[index].pending = students[index].total - students[index].paid;
+                renderTable();
+            }
+        }
+
+        function deleteStudent(index) {
+            students.splice(index, 1);
+            renderTable();
+        }
+
+        function filterStudents() {
+            const search = document.getElementById("search").value.toLowerCase();
+            const rows = document.querySelectorAll("#studentTable tr");
+            rows.forEach(row => {
+                const name = row.cells[0].innerText.toLowerCase();
+                row.style.display = name.includes(search) ? "" : "none";
+            });
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        function exportToCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,Name,Class,Total Fees,Paid,Pending\n";
+            students.forEach(student => {
+                csvContent += `${student.name},${student.className},${student.total},${student.paid},${student.pending}\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "student_fees.csv");
+            document.body.appendChild(link);
+            link.click();
+        }
+    </script>
+</body>
+</html>

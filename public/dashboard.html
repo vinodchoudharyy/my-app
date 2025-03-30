@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="chat.js">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif; 
+        }
+        body {
+            display: flex;
+            height: 100vh;
+            background: linear-gradient(135deg, #2C3E50, #34495E); 
+            background-size: cover;
+            color: #ecf0f1;
+            overflow: hidden; 
+        }
+        .sidebar {
+            width: 250px;
+            background: rgba(52, 152, 219, 0.9); 
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .sidebar .logo {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .sidebar ul {
+            list-style: none;
+        }
+        .sidebar ul li {
+            padding: 12px;
+            margin: 10px 0;
+            background: #34495e;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .sidebar ul li:hover {
+            background: #1abc9c; 
+            transform: translateX(5px);
+        }
+        .sidebar ul li.active {
+            background: #1abc9c; 
+            color: #fff;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            margin-left: 270px; 
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            color: #2c3e50;
+            overflow-y: auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header button {
+            padding: 12px 24px;
+            background-color: #2980b9; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        .header button:hover {
+            background-color: #3498db; 
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .small-cards {
+            display: flex;
+            gap: 10px;
+        }
+        .small-card {
+            flex: 1;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        .small-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .small-card h4 {
+            margin-bottom: 10px;
+        }
+        .small-card p {
+            font-size: 18px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            border-color: #2980b9; 
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+                position: absolute; 
+                top: 0;
+                bottom: 0;
+                left: -250px; 
+                transition: left 0.3s ease;
+            }
+            .sidebar.active {
+                left: 0;
+            }
+            .main-content {
+                margin-left: 20px; /* Adjust main content margin */
+            }
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+            .small-cards {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+        
+               
+           
+             
+            <H1></H1>
+
+            <img src="/logo.png" style="height: 120px; width: 120px;"/>
+        </div>
+        
+        <ul>
+            <li button class= "btn"onclick="window.location.href='announcement.html'">Announcements</button></li>
+            
+            
+            <li button class ="btn"onclick="window.location.href='Community.html'">Community</button></li>
+            <li button class ="btn"onclick="window.location.href='fees.html'">Fees</button></li>
+            <li button class ="btn"onclick="window.location.href='Attendance.html'">Attendance</button></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="header">
+            <h2>DASHBOARD📝</h2>
+
+         
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Profile Button</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #141e30, #243b55);
+        }
+        .profile-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .profile-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+     
+        .dropdown-menu {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            width: 200px;
+            display: none;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: 0.3s;
+        }
+        .dropdown-menu a:hover {
+            background: #f1f1f1;
+        }
+        .dropdown-menu.show {
+            display: block;
+        }
+        .upload-btn {
+            display: block;
+            padding: 10px;
+            border: none;
+            background: #0072ff;
+            color: white;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 2px 2px 8px 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <button class="profile-btn" onclick="toggleDropdown()">
+            <img src="default-profile.jpg" alt="Profile👤" class="profile-pic" id="profilePic">
+        </button>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="settings.html">Settings</a>
+            <a href="announcement.html">Announcements</a>
+            <a href="#" onclick="editProfile()">Edit Profile👤</a>
+            <a href="#" onclick="logout()">Logout</a>
+            <input type="file" id="fileInput" style="display:none" onchange="uploadProfilePic(event)">
+            <button class="upload-btn" onclick="document.getElementById('fileInput').click()">Upload Profile Picture</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            document.getElementById("dropdownMenu").classList.toggle("show");
+        }
+        function editProfile() {
+            alert("Redirecting to profile editing...");
+        }
+        function logout() {
+            alert("Logging out...");
+            window.location.href = "login.html";
+        }
+        function uploadProfilePic(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById("profilePic").src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.profile-btn, .profile-pic')) {
+                document.getElementById("dropdownMenu").classList.remove("show");
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <h3>Announcements📢</h3>
+                <p><b>Announcement Title</b> - 10 min</p>
+                <p>Sample text</p>
+                <hr>
+                <p><b>Announcement Title</b> - 2 min</p>
+                <p>Sample text</p>
+            </div>
+            <div class="chat-container">
+                <div class="chat-box" id="chatBox">
+                    <div class="chat-message">Hello! How can I help you?</div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Type a message...">
+                    <button class="send-btn" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+            
+    
+    </div>
+
+    <script>
+        // Toggle sidebar for mobile view
+        const sidebar = document.querySelector('.sidebar');
+        const toggleButton = document.querySelector('.header button');
+        
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+    </script>
+    
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="dashboard.html">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .chat-container {
+            width: 400px;
+            max-width: 100%;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #ddd;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .chat-message {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            max-width: 70%;
+        }
+
+        .user {
+            background-color: #007bff;
+            color: white;
+            margin-left: auto;
+        }
+
+        .chat-input-container {
+            display: flex;
+            padding: 10px;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .send-btn {
+            padding: 10px 15px;
+            margin-left: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .send-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    </div>
+
+    <script>
+        // Function to send message
+        function sendMessage() {
+            let chatInput = document.getElementById("chatInput");
+            let chatBox = document.getElementById("chatBox");
+
+            let message = chatInput.value.trim();
+            if (message) {
+                let newMessage = document.createElement("div");
+                newMessage.classList.add("chat-message", "user");
+                newMessage.textContent = message;
+                chatBox.appendChild(newMessage);
+                
+                chatInput.value = ""; // Clear input after sending
+                chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the latest message
+            }
+        }
+
+        // Button click event (attached correctly)
+        document.getElementById("sendBtn").onclick = function() {
+            sendMessage();
+        }
+
+        // Detect Enter key inside the input field
+        document.getElementById("chatInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter" && !event.shiftKey) { // Prevent Shift+Enter for new line
+                event.preventDefault(); // Stop form submission if inside a form
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

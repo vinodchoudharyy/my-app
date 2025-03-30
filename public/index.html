@@ -1,43 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #141e30, #243b55);
+            background-attachment: fixed;
+        }
+        
+        .container {
+            width: 400px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+            backdrop-filter: blur(10px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        h2 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transition: 0.3s ease-in-out;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(90deg, #0072ff, #00c6ff);
+        }
+        
+        .toggle {
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            color: #00c6ff;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        
+        .toggle:hover {
+            text-decoration: underline;
+            color: #0072ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="formContainer">
+        <h2 id="formTitle">Login</h2>
+        <form id="loginForm" onsubmit="return handleLogin(event)">
+            <div class="form-group">
+                <input type="text" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <p class="toggle" onclick="toggleForm()">Don't have an account? Register</p>
+        </form>
+        
+        <form id="registerForm" style="display: none;">
+            <h2>Register</h2>
+            <div class="form-group">
+                <input type="text" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn">Register</button>
+            <p class="toggle" onclick="toggleForm()">Already have an account? Login</p>
+        </form>
+    </div>
+    
+    <script>
+        function toggleForm() {
+            let loginForm = document.getElementById("loginForm");
+            let registerForm = document.getElementById("registerForm");
+            let formTitle = document.getElementById("formTitle");
+            
+            if (loginForm.style.display === "none") {
+                loginForm.style.display = "block";
+                registerForm.style.display = "none";
+                formTitle.innerText = "Login";
+            } else {
+                loginForm.style.display = "none";
+                registerForm.style.display = "block";
+                formTitle.innerText = "Register";
+            }
+        }
+        
+        function handleLogin(event) {
+            event.preventDefault();
+            window.location.href = "dashboard.html";
+        }
+    </script>
+</body>
 </html>

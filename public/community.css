@@ -1,0 +1,34 @@
+#community {
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+
+  .community-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .community-events, .community-members, .community-forum {
+    width: 30%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+  }
+  .community-events ul, .community-members ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .community-events li, .community-members li {
+    margin-bottom: 10px;
+  }
+
+  .community-members li img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
